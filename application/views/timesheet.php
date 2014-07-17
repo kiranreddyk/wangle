@@ -2,7 +2,7 @@
 <?php
 
 $this->load->view('header');
-$this->load->view('sidebar');
+$this->load->view('sidebar_emp');
 ?>
 
 <section id="page">
@@ -20,7 +20,7 @@ $this->load->view('sidebar');
                                                             <form role="form" method="post" action="timesheet" class="form-horizontal">
                                                                     <div class="form-group">
 											<label>Project Name:</label>
-                                                                                        <input name="project_name" type="text" placeholder="Project Name" class="form-control">
+                                                                                        <input name="project_name" type="text"  placeholder="Project Name" class="form-control">
 										</div>
                                                                     <div class="form-group">
 											<label>Task Description</label>

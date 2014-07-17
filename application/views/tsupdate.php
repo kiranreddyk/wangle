@@ -2,7 +2,7 @@
 <?php
 
 $this->load->view('header');
-$this->load->view('sidebar');
+$this->load->view('sidebar_emp');
 
 ?>
 			  						<br><h4>Date Picker</h4>

@@ -64,21 +64,32 @@ class emp_model extends CI_Model
     {
         $user = $this->ion_auth->user()->row();
         $umail= $user->email;
-        $datestring= "%y/%m/%d";
-        $time= $this->input->post('from');
-        $from = mdate($datestring, $time);
-        $time1= $this->input->post('to');
-        $to = mdate($datestring, $time1);
+        //$datestring= "%y/%m/%d";
+        $time= $this->input->post('date_from');
+        //$from = mdate($datestring, $time);
+        $time1= $this->input->post('date_to');
+        if($time <> 0 && $time1 <> 0)
+        {
+        //$to = mdate($datestring, $time1);
          $data = array(
              
              'emp_id'=> $umail,
-             'leave_desc'=>$this->input->post('leave_desc'),
-             'type_of_leave'=>$this->input->post('type_of_leave'),
-             'from_'=>  $from,
-             'to'=> $to,
+             'leave_desc'=>$this->input->post('reason'),
+             'type_of_leave'=>$this->input->post('leave_type'),
+             'date_from'=>  $time,
+             'date_to'=> $time1,
              'feedback'=>  $this->input->post('feedback')
                  
              );
-         return $this->db->insert('apply_leave', $data);  
+         
+         $this->db->insert('apply_leave', $data);  
+        }
+         return ($this->db->affected_rows() != 1) ? false : true;
+    }
+    public function showLeave($st) {
+        $query=  $this->db->where('status',$st);
+        $query=$this->db->get('apply_leave');
+        return $query->result_array();
+        
     }
 }

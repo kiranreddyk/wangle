@@ -1,12 +1,12 @@
 <?php
 
 $this->load->view('header');
-$this->load->view('sidebar');
+$this->load->view('sidebar_emp');
 
 ?>
 <section name="page">
 <div class="col-lg-7">
-	  					<div class="content-box-large">
+	  					<div class="col-lg-12">
 			  				<div class="panel-heading">
 					            <div class="panel-title"></div>
 					          

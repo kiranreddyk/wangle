@@ -13,20 +13,25 @@ class Employee extends CI_Controller {
 		}
                 if ($this->ion_auth->is_admin())
 		{
-			$this->session->set_flashdata('message', 'You must be an admin to view this page');
-			redirect('admin/index');
+			$this->session->set_flashdata('message', 'Have a nice day');
+			redirect('admin');
 		}
                 $user = $this->ion_auth->user()->row();
 		$this->data['user']= $user->username;
+                  $this->data['message'] = $this->session->flashdata('message');
     }
     public function index() {
+        $this->emphome();
+    }
+    public function emphome() {
         $this->data['title'] = 'Employee Home';
+      
         $this->load->view('home',  $this->data);
     }
     public function timesh()
     {
         $user = $this->ion_auth->user()->row();
-		$uname['uname']= $user->username;
+		$data['uname']= $user->username;
                 $this->data['title'] = 'TimeSheet';
         //$this->load->view('header');
         $this->load->view('timesheet',  $this->data);
@@ -37,15 +42,16 @@ class Employee extends CI_Controller {
     {
         $this->data['title'] = 'TimeSheet';
        $this->emp_model->enterTimeSheet();
-       $this->load->view('timesheet',  $this->data);
-        //$this->load->view('footer');
+      $this->session->set_flashdata('message', "<p>Timesheet updated successfully.</p>");
+        $this->emphome();
     }
     public function update()
     {
-        $this->data['title'] = 'TimeSheet';
+        $this->data['title'] = 'daily time Sheet';
         
-        updateTimeSheet();
-        $this->load->view('showts',  $this->data);
+        $this->emp_model->updateTimeSheet();
+      $this->session->set_flashdata('message', "<p>Timesheet updated successfully.</p>");
+        $this->emphome();
         
         
    
@@ -54,7 +60,7 @@ class Employee extends CI_Controller {
     {
         $user = $this->ion_auth->user()->row();
 		$id= $user->email;
-                $this->data['title'] = 'TimeSheet Update';
+                $this->data['title'] = 'daily Time Sheet Update';
          $ts=  $this->emp_model->showTimeSheet($id);
          $this->data['timesheet']=$ts;
          $this->load->view('tsupdate1',  $this->data);
@@ -67,8 +73,13 @@ class Employee extends CI_Controller {
     }
     public function leave() {
         $this->data['title'] = 'Apply for leave';
-   $this->emp_model->enterLeave();
-      
-        $this->load->view('index',  $this->data);
+   $fl = $this->emp_model->enterLeave();
+      if($fl === TRUE)
+      {   
+          $this->session->set_flashdata('message', "<p>Leave Submited wait for approval.</p>");
+          $this->data['leave']= $this->emp_model->showLeave(0);
+          $this->load->view('leavelist',  $this->data);
+      }
     }
+    
 }

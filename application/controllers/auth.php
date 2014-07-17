@@ -5,9 +5,12 @@ class Auth extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+                
 		$this->load->library('ion_auth');
 		$this->load->library('form_validation');
 		$this->load->helper('url');
+               
+                
 
 		// Load MongoDB library instead of native db driver if required
 		$this->config->item('use_mongodb', 'ion_auth') ?
@@ -30,6 +33,7 @@ class Auth extends CI_Controller {
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+                
 		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
 		{
 			//redirect them to the home page because they must be an administrator to view this
@@ -54,6 +58,10 @@ class Auth extends CI_Controller {
 	//log the user in
 	function login()
 	{
+            if ($this->ion_auth->logged_in())
+		{
+			redirect('admin');
+		}
 		$this->data['title'] = "Login";
 
 		//validate form input
@@ -71,7 +79,7 @@ class Auth extends CI_Controller {
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				redirect('/admin', 'refresh');
 			}
 			else
 			{

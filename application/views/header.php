@@ -3,9 +3,21 @@
   <head>
       <title>Wangle-<?php echo $title;?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <link media="screen" type="text/css" href="http://scriptigniter.com/emp/css/bootstrap.css" rel="stylesheet">
+<link href="http://scriptigniter.com/emp/css/jquery-ui.css" rel="stylesheet">
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+  $(function() {
+    $( ".datepicker" ).datepicker({changeMonth: true,
+	dateFormat: "dd-mm-yy",
+	changeYear: true,
+	yearRange: "1980:c+10"
+	});
+  });
+  </script>
     <!-- jQuery UI -->
     <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
