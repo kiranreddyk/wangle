@@ -20,7 +20,7 @@
                     
                     <li class="submenu">
                          <a href="#">
-                            <i class="fa fa-umbrella"></i> Apply for leave
+                            <i class="fa fa-umbrella"></i> Apply for 
                             <span class="caret pull-right"></span>
                          </a>
                          <!-- Sub menu -->
