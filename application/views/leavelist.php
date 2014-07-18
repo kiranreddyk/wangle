@@ -42,15 +42,24 @@ $this->load->view('sidebar_emp');
             </tr>
             <?php
             foreach ($leave as $key => $value) {
-                
+                $date1= $value['date_from'];
+                $date2= $value['date_to'];
+                $diff = abs(strtotime($date2) - strtotime($date1));
+
+$years = floor($diff / (365*60*60*24));
+$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+printf("%d years, %d months, %d days\n", $years, $months, $days);
             ?>
             <tr id="35" class="PendingClass">
                 <td><?php echo $value['id']; ?></td>
                 <td><?php echo $value['type_of_leave']; ?></td>
-                <td><?php echo $value['leave_desc']; ?></td>
+               
                 <td><?php echo $value['date_from']; ?></td>
                 <td><?php echo $value['date_to']; ?></td>
-                <td><?php echo $value['feedback']; ?></td>
+                 <td><?php echo $value['leave_desc']; ?></td>
+                <td><?php echo $days; ?></td>
                 <td><?php echo $value['status']; ?></td>
             </tr>
             <?php } ?>            

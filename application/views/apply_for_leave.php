@@ -53,7 +53,7 @@ $this->load->view('sidebar_emp');
     <div class="control-group">
 		<label class="control-label">Reason</label>
 		<div class="controls">
-                    <textarea style="width:80%;" name="reason" id="reason"></textarea>
+                    <textarea style="width:60%;" name="reason" class="form-control"></textarea>
 					</div>
 	</div>
         <div class="control-group">
